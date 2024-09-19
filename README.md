@@ -7,11 +7,11 @@ This project is a collaborative text editor built using React, Quill, and Socket
 
 #### Spinning up containers
 
-![spinning-up-backend-container](./assets/Spinning_Containers(Backend).mp4)
+![spinning-up-backend-container](./assets/Spinning_Containers(Backend)(1).mp4)
 
 #### Working Demo
 
-![working-demo](./assets/Working_Demo.mp4)
+![working-demo](./assets/Working_Demo(1).mp4)
 
 
 ## Table of Contents
