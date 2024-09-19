@@ -1,30 +1,26 @@
-# Live Editor with React, Quill, and Socket.IO
 
-This project is a collaborative text editor built using React, Quill, and Socket.IO. It allows multiple users to simultaneously edit a document in real-time, with changes instantly reflected across all connected clients. The frontend is developed using Vite with React, providing a fast and efficient development environment.
+# Live Editor with React, Quill, Socket.IO, and MongoDB Atlas
+
+This project is a collaborative text editor built using React, Quill, and Socket.IO. It allows multiple users to simultaneously edit a document in real-time, with changes instantly reflected across all connected clients. The frontend is developed using Vite with React, providing a fast and efficient development environment, and is deployed on **Vercel**. The backend is deployed on **Render**, with MongoDB Atlas providing the database.
 
 ## Demo
 
 #### Spinning up containers
 
-<image src="https://raw.githubusercontent.com/nimish-kumar/live-editor/master/demo/images/spinning-up-containers.gif" width="667" height="223" />
+![spinning-up-backend-container](./assets/Spinning_Containers(Backend).mp4)
 
-#### Testing on local
-They share the same URL, but modifications occur exclusively on one of them.
+#### Working Demo
 
-<image src="https://raw.githubusercontent.com/nimish-kumar/live-editor/master/demo/images/live-editor-run.gif" width="950" height="450" />
+![working-demo](./assets/Working_Demo.mp4)
 
-#### Cleanup
-
-<image src="https://raw.githubusercontent.com/nimish-kumar/live-editor/master/demo/images/destroying-containers.gif" width="667" height="223" />
 
 ## Table of Contents
 
-- [Live Editor with React, Quill, and Socket.IO](#live-editor-with-react-quill-and-socketio)
+- [Live Editor with React, Quill, Socket.IO, and MongoDB Atlas](#live-editor-with-react-quill-socketio-and-mongodb-atlas)
   - [Demo](#demo)
       - [Spinning up containers](#spinning-up-containers)
-      - [Testing on local](#testing-on-local)
+      - [Working Demo](#working-demo)
       - [Cleanup](#cleanup)
-  - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -39,6 +35,8 @@ They share the same URL, but modifications occur exclusively on one of them.
 - **Rich Text Editing**: The Quill editor allows for easy and intuitive rich text editing.
 - **Efficient Development**: The frontend is built with Vite and React, providing a fast and efficient development environment.
 - **Socket.IO Integration**: Socket.IO is used for handling real-time communication between clients.
+- **MongoDB Atlas**: Cloud-based MongoDB storage for documents.
+- **Dockerized for Easy Deployment**: Both frontend and backend are containerized for seamless local development.
 
 ## Getting Started
 
@@ -46,35 +44,57 @@ They share the same URL, but modifications occur exclusively on one of them.
 
 Make sure you have the following installed:
 
-- Node.js (v20.9.0+): [Download and install Node.js](https://nodejs.org/) [ONLY FOR DEVELOPMENT]
 - Docker: [Download and install Docker](https://docs.docker.com/get-docker/)
 - Docker Compose: [Download and install Docker Compose](https://docs.docker.com/compose/install/)
+- MongoDB Atlas account (you’ll need to set up your cluster, as described below).
 
 ### Usage Guidelines
+
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/nimish-kumar/live-editor
+   git clone https://github.com/yourusername/live-editor.git
    ```
-2. To start the containers, ensure you are at the project's root directory and execute the following command:
+
+2. Create a `.env` file in the root directory and add the following environment variables (replace MongoDB credentials with your actual details):
+
     ```bash
-    docker compose -f docker-compose.dev.yaml up
-    ```
-    You can append `-d` flag to run the containers in `detached mode`.
-     ```bash
-    docker compose -f docker-compose.dev.yaml up -d
+    # Local development ports
+    PROJ_SERVER_PORT=8001
+    PROJ_CLIENT_PORT=5173
+
+    # MongoDB Atlas connection string
+    PROJ_DB_CONNECTION_STRING=mongodb+srv://<username>:<password>@cluster0.mongodb.net/editor-db?retryWrites=true&w=majority
+
+    # Local URLs for Docker setup
+    PROJ_DEPLOYED_SERVER_URL=http://localhost:${PROJ_SERVER_PORT}
+    PROJ_DEPLOYED_FRONTEND_URL=http://localhost:${PROJ_CLIENT_PORT}
     ```
 
-3. Once you see serving message, follow the link to get started.
-4. To halt the containers, terminate the process in the terminal using `Ctrl+C`. To remove the containers, ensure you are at the project's root directory and execute the following command:
+3. To start the containers, ensure you are at the project's root directory and execute the following command:
     ```bash
-    docker compose -f docker-compose.dev.yaml down
+    docker-compose build
+    docker-compose up
     ```
-5. Ensure you clear all Docker images and rebuild them, along with the containers, in case there are code changes. To remove existing images, use the following commands:
+    You can append the `-d` flag to run the containers in detached mode:
     ```bash
-    docker image remove live-editor-client
-    docker image remove live-editor-server
+    docker-compose up -d
     ```
+
+4. Once the containers are up, follow the links displayed in the terminal to access the frontend (`http://localhost:5173`) and backend.
+
+5. To halt the containers, terminate the process in the terminal using `Ctrl+C`. To remove the containers, ensure you are at the project's root directory and execute the following command:
+    ```bash
+    docker-compose down
+    ```
+
+6. To clear all Docker images and rebuild them (if there are code changes), use the following commands:
+    ```bash
+    docker image rm live-editor-client
+    docker image rm live-editor-server
+    ```
+
+---
 
 ## Contributing
 
@@ -88,13 +108,14 @@ Make sure you have the following installed:
 - [pnpm](https://pnpm.io/)
 
 ### Environment Variables
-Create a .env file in root directory and add the following variables:
 
-```.env
+Create a `.env` file in the root directory and add the following variables:
+
+```bash
 PROJ_SERVER_PORT=8001
 PROJ_CLIENT_PORT=5173
 PROJ_DEPLOYED_SERVER_URL=http://localhost:${PROJ_SERVER_PORT}
-PROJ_DB_CONNECTION_STRING=mongodb://localhost:27017/editor-db
+PROJ_DB_CONNECTION_STRING=mongodb+srv://<username>:<password>@cluster0.mongodb.net/editor-db?retryWrites=true&w=majority
 PROJ_DEPLOYED_FRONTEND_URL=http://localhost:${PROJ_CLIENT_PORT}
 ```
 
