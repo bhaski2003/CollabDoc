@@ -1,0 +1,160 @@
+/* Global reset */
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f3f3f3;
+}
+
+/* Toolbar */
+.quill .ql-toolbar.ql-snow {
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #f3f3f3; /* Default Light Mode Toolbar */
+  border: none;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Editor Container */
+.quill .ql-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quill .ql-container.ql-snow {
+  border: none;
+}
+
+/* Editor Styling */
+.quill .ql-editor {
+  width: 8.5in;
+  min-height: 9in;
+  padding: 1in;
+  margin: 1rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  background-color: white; /* Default Light Mode Editor Background */
+}
+
+/* Printing Styles */
+@page {
+  margin: 1in;
+}
+
+@media print {
+  body {
+    background: none;
+  }
+
+  .quill .ql-editor {
+    width: 6.5in;
+    height: 9in;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    align-self: flex-start;
+    overflow: hidden;
+  }
+
+  .quill .ql-toolbar.ql-snow {
+    display: none;
+  }
+}
+
+/* Light Mode */
+body {
+  background-color: #f3f3f3;
+  color: #000;
+}
+
+.app-container.light {
+  background-color: #f3f3f3;
+  color: #000;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #ffc0cb; /* Light Pink for Light Mode */
+}
+
+.quill .ql-toolbar.ql-snow {
+  background-color: #ffc0cb; /* Light Pink Toolbar for Light Mode */
+}
+
+.quill .ql-editor {
+  background-color: white;
+  color: #000; /* Black text for Light Mode */
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.app-container.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+header.dark {
+  background-color: #add8e6; /* Light Blue for Dark Mode */
+}
+
+.quill .ql-toolbar.ql-snow.dark {
+  background-color: #add8e6; /* Light Blue Toolbar for Dark Mode */
+}
+
+.app-container.dark .ql-editor {
+  background-color: #002244; /* Dark Blue Editor Background for Dark Mode */
+  color: #fff; /* White Text in Dark Mode */
+}
+
+/* General Button Styling */
+button {
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+/* Apply Roboto font globally */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.ql-editor {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.ql-toolbar {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.ql-editor {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.ql-toolbar {
+  font-family: 'Roboto', sans-serif;
+}
